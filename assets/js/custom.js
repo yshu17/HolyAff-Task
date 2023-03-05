@@ -3,10 +3,10 @@ const surveyButtons = document.querySelectorAll('.survey_button');
 // Создаем пустой объект для хранения ответов
 const answers = [];
 // Проходимся по всем кнопкам опросника и добавляем обработчик клика
-surveyButtons.forEach(button => {
-  button.addEventListener('click', () => {
+surveyButtons.forEach(buttonModal => {
+  buttonModal.addEventListener('click', () => {
     // Получаем текст выбранного ответа
-    const answerText = button.innerText.trim();
+    const answerText = buttonModal.innerText.trim();
     // Сохраняем ответ в объекте answers
     console.log('answerText :>> ', answerText);
     answers.push(answerText);
@@ -22,7 +22,7 @@ showAnswersButton.addEventListener('click', () => {
   console.log(answers);
 });
 
-var count = 10;
+var id_counter = 10;
 function publishComment() {
 
   // Получаем значение текстового поля с комментарием
@@ -31,7 +31,7 @@ function publishComment() {
   // Создаем новый элемент комментария
   let newComment = document.createElement("div");
   newComment.classList.add("comments");
-  newComment.setAttribute("id", `comment${++count}`);
+  newComment.setAttribute("id", `comment${++id_counter}`);
   newComment.setAttribute("style", `display:block`)
   
 
