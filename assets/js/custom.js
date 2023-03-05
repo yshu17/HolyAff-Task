@@ -1,33 +1,65 @@
-var portal = 'it';
-var theme = '3-Samsung_S10';
-var template = 'surbox';
-var brand_country = 'Spain';
-var dayNames = Array("Domingo", "Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado");
-var monthNames = new Array("Janeiro", "fevereiro", "março", "abril", "maio", "junho", "julho", "agosto", "setembro", "outubro", "novembro", "dezembro");
-var img_regalo = "img-2.png";
-var minutos_y = "minutos e ";
-var segundos = "segundos ";
-var url_f = "";
-var modalOptions = {
-    backdrop: 'static',
-    keyboard: false
-};
-var adS = ["bG9jYWwucHJlbG9hZGVycy5jb20=", "bG9jYWwucHJlbG9hZGVycy5jb20="];
+// Получаем все элементы с классом "survey_button"
+const surveyButtons = document.querySelectorAll('.survey_button');
+// Создаем пустой объект для хранения ответов
+const answers = [];
+// Проходимся по всем кнопкам опросника и добавляем обработчик клика
+surveyButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    // Получаем текст выбранного ответа
+    const answerText = button.innerText.trim();
+    // Сохраняем ответ в объекте answers
+    console.log('answerText :>> ', answerText);
+    answers.push(answerText);
+  });
+});
 
-!function (f, b, e, v, n, t, s) {
-    if (f.fbq) return;
-    n = f.fbq = function () { n.callMethod ? n.callMethod.apply(n, arguments) : n.queue.push(arguments) };
-    if (!f._fbq) f._fbq = n;
-    n.push = n;
-    n.loaded = !0;
-    n.version = '2.0';
-    n.queue = [];
-    t = b.createElement(e);
-    t.async = !0;
-    t.src = v;
-    s = b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t, s)
+// Получаем кнопку "Показать ответы"
+const showAnswersButton = document.getElementById('p_modal_button3');
+
+// Добавляем обработчик клика на кнопку "Показать ответы"
+showAnswersButton.addEventListener('click', () => {
+  // Выводим ответы на консоль
+  console.log(answers);
+});
+
+var count = 10;
+function publishComment() {
+
+  // Получаем значение текстового поля с комментарием
+  let commentText = document.getElementById("comment-field").value;
+  let commentUsername = document.getElementById("comment-username").value;
+  // Создаем новый элемент комментария
+  let newComment = document.createElement("div");
+  newComment.classList.add("comments");
+  newComment.setAttribute("id", `comment${++count}`);
+  newComment.setAttribute("style", `display:block`)
+  
+
+  // Добавляем HTML-разметку для нового комментария
+  newComment.innerHTML = `
+    <div class="profile">
+      <img alt="image" src="./assets/images/1.webp">
+    </div>
+    <div class="comment-content">
+      <p class="name">${commentUsername}</p>
+      <p>${commentText}</p>
+    </div>
+    <div class="clr"></div>
+    <div class="comment-status">
+      <span>
+        Curte·comente
+        <img alt="image" src="./assets/images/like.webp" width="15px" height="15px">
+        0
+      </span>
+      <small>·<u>Just now</u></small>
+    </div>
+  `;
+
+  // Добавляем новый комментарий в список комментариев
+  let commentList = document.getElementById("comment-list");
+  commentList.prepend(newComment);
+
+  // Очищаем текстовое поле с комментарием
+  document.getElementById("comment-field").value = "";
 }
-    (window, document, 'script', '//connect.facebook.net/en_US/fbevents.js');
-fbq('init', '{lander.param:fbpixel}');
-fbq('track', "PageView");
+
